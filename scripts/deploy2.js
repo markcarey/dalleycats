@@ -14,7 +14,7 @@ const salt = ethers.utils.formatBytes32String(v);
 //console.log(emptyBytes, " ", AddressBytes);
 //return;
 
-const ABI = ["initialize(string memory _name, string memory _symbol, address _lzEndpoint, uint _startMintId, uint _endMintId, address sender, uint16[] memory remoteChainIds, string memory _contractURIHash)"];
+const ABI = ["function initialize(string memory _name, string memory _symbol, address _lzEndpoint, uint _startMintId, uint _endMintId, address sender, uint16[] memory remoteChainIds, string memory _contractURIHash)"];
 const iface = new ethers.utils.Interface(ABI);
 
 const name = "Dalley Cats";
@@ -47,7 +47,7 @@ addr["moonbeam-alpha"] = {
     "lzEndpoint": "0xb23b28012ee92E8dE39DEb57Af31722223034747",
     "chainId": 10126
 };
-const targetChains = [ "goerli", "moonbeam-alpha", "mumbai" ];
+const targetChains = [ "goerli", "moonbeam-alpha", "mumbai", "arbitrum-goerli" ];
 var chainIds = [];
 for (let i = 0; i < targetChains.length; i++) {
     var thisChain = targetChains[i];
