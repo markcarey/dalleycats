@@ -201,20 +201,20 @@ async function mint(mintChain, color, wearing, deliveryChain) {
         "wearing": wearing,
         "bgcolor": addr[chain].bgcolor
     };
-    //const res = await fetch(sidedoorAPI + '/nfts/metadata', { 
-    //    method: 'post', 
-    //    headers: new Headers({
-    //        'Authorization': 'Bearer apikeytbd', 
-    //        'Content-Type': 'application/json'
-    //    }), 
-    //    body: params
-    //});
-    //var result = await res.json();
-    var result ={
-        "result": "ok",
-        "image": "bafybeiaomrguepg4jmcpujyr5sklyhrqhvw6bo6redy4uvbubd7n2m2p4i",
-        "meta": "bafkreibfqhevkqjufmugut5qo445icms6o2juc6x2a2vlnag4vdiu4bu2q"
-        };
+    const res = await fetch(sidedoorAPI + '/nfts/metadata', { 
+        method: 'post', 
+        headers: new Headers({
+            'Authorization': 'Bearer apikeytbd', 
+            'Content-Type': 'application/json'
+        }), 
+        body: params
+    });
+    var result = await res.json();
+    //var result ={
+    //    "result": "ok",
+    //    "image": "bafybeiaomrguepg4jmcpujyr5sklyhrqhvw6bo6redy4uvbubd7n2m2p4i",
+    //    "meta": "bafkreibfqhevkqjufmugut5qo445icms6o2juc6x2a2vlnag4vdiu4bu2q"
+    //    };
     const ipfsMeta = "ipfs://" + result.meta;
     const imageURL = ipfsToHttp(result.image);
     preload(imageURL);
