@@ -57,13 +57,52 @@ contract CrossChainNFT is Initializable, ONFT721Upgradeable, ERC721URIStorageUpg
     }
 
     function evmEstimateSendFee(uint16 _dstChainId, address _to, uint _tokenId) public view returns (uint nativeFee, uint zroFee) {
-        bytes memory payload = abi.encode(abi.encodePacked(_to), _tokenId);
+        bytes memory payload = abi.encode(abi.encodePacked(_to), _tokenId, this.tokenURI(_tokenId));
         return lzEndpoint.estimateFees(_dstChainId, address(this), payload, false, "");
     }
 
     // @dev convenience method
     function evmSend(address payable _from, uint16 _dstChainId, address _to, uint _tokenId) public payable {
         _send(_from, _dstChainId, abi.encodePacked(_to), _tokenId, _from, address(0), "");
+    }
+
+    function _send(address _from, uint16 _dstChainId, bytes memory _toAddress, uint _tokenId, address payable _refundAddress, address _zroPaymentAddress, bytes memory _adapterParams) internal virtual override {
+        _debitFrom(_from, _dstChainId, _toAddress, _tokenId);
+
+        bytes memory payload = abi.encode(_toAddress, _tokenId, this.tokenURI(_tokenId));
+        if (useCustomAdapterParams) {
+            _checkGasLimit(_dstChainId, FUNCTION_TYPE_SEND, _adapterParams, NO_EXTRA_GAS);
+        } else {
+            require(_adapterParams.length == 0, "LzApp: _adapterParams must be empty.");
+        }
+        _lzSend(_dstChainId, payload, _refundAddress, _zroPaymentAddress, _adapterParams);
+
+        uint64 nonce = lzEndpoint.getOutboundNonce(_dstChainId, address(this));
+        emit SendToChain(_from, _dstChainId, _toAddress, _tokenId, nonce);
+    }
+
+    function _nonblockingLzReceive(uint16 _srcChainId, bytes memory _srcAddress, uint64 _nonce, bytes memory _payload) internal virtual override {
+        // decode and load the toAddress
+        (bytes memory toAddressBytes, uint amount, string memory uri) = abi.decode(_payload, (bytes, uint, string));
+        address toAddress;
+        assembly {
+            toAddress := mload(add(toAddressBytes, 20))
+        }
+
+        _creditTo(_srcChainId, toAddress, amount, uri);
+
+        emit ReceiveFromChain(_srcChainId, _srcAddress, toAddress, amount, _nonce);
+    }
+
+    function _creditTo(uint16, address _toAddress, uint _tokenId, string memory uri) internal {
+        require(!_exists(_tokenId) || (_exists(_tokenId) && ERC721Upgradeable.ownerOf(_tokenId) == address(this)));
+        if (!_exists(_tokenId)) {
+            _safeMint(_toAddress, _tokenId);
+            _setTokenURI(_tokenId, uri);
+        } else {
+            _transfer(address(this), _toAddress, _tokenId);
+            _setTokenURI(_tokenId, uri);
+        }
     }
 
     /**
