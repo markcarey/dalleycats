@@ -53,8 +53,7 @@ rpcURLs.goerli = "eth-goerli.alchemyapi.io/v2/n_mDCfTpJ8I959arPP7PwiOptjubLm57";
 rpcURLs.mumbai = "polygon-mumbai.g.alchemy.com/v2/Ptsa6JdQQUtTbRGM1Elvw_ed3cTszLoj";
 rpcURLs.optigoerli = "opt-goerli.g.alchemy.com/v2/jb4AhFhyR0X_ChVX5J1f0oWQ6GvJqLK0";
 
-const nftPortAPI = "https://api.nftport.xyz/v0/accounts/";
-const sidedoorAPI = "https://api.sidedoor.tools/";
+const sidedoorAPI = "https://api.sidedoor.tools";
 
 var chain = "moonbeam-alpha";
 //var chain = "optigoerli";
@@ -202,12 +201,12 @@ async function mint(mintChain, color, wearing, deliveryChain) {
         "bgcolor": addr[chain].bgcolor
     };
     const res = await fetch(sidedoorAPI + '/nfts/metadata', { 
-        method: 'post', 
+        method: 'POST', 
         headers: new Headers({
             'Authorization': 'Bearer apikeytbd', 
             'Content-Type': 'application/json'
         }), 
-        body: params
+        body: JSON.stringify(params)
     });
     var result = await res.json();
     //var result ={
