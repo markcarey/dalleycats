@@ -255,7 +255,7 @@ async function jump(tokenId, deliveryChain) {
         $("#jump-button").text("Jump Started...");
     });
     let arrivalFilter = addr[deliveryChain].dalley.filters.Transfer(nftAddress, accounts[0]);
-    dalley.once(mintFilter, async (from, to, id, event) => { 
+    addr[deliveryChain].dalley.once(arrivalFilter, async (from, to, id, event) => { 
         tokenId = id;
         $("#mint-title").text("");
         $("#mint-title-label").text("Jump Completed!");
