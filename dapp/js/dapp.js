@@ -13,7 +13,7 @@ addr.goerli = {
     "bgcolor": "grey"
 };
 addr.mumbai = {
-    "Polygon Mumbai",
+    "name": "Polygon Mumbai",
     "rpc": "polygon-mumbai.g.alchemy.com/v2/Ptsa6JdQQUtTbRGM1Elvw_ed3cTszLoj",
     "start": 1001,
     "end": 2000,
@@ -155,7 +155,7 @@ async function connect(){
                 params: [{ chainId: web3.utils.toHex(5) }],
             });
         }
-        $("#connect").hide();
+        $("#offcanvas").find("button").click();
     } else {
         // The user doesn't have Metamask installed.
         console.log("window.ethereum false");
@@ -254,7 +254,7 @@ function ipfsToHttp(ipfs) {
 
 $( document ).ready(function() {
 
-    $("#connect").click(function(){
+    $(".connect").click(function(){
         connect();
         return false;
     });
