@@ -12,7 +12,8 @@ addr.goerli = {
     "lzEndpoint": "0xbfD2135BFfbb0B5378b56643c2Df8a87552Bfa23",
     "chainId": "10121",
     "bgcolor": "grey",
-    "slug": "goerli"
+    "slug": "goerli",
+    "native": "ETH"
 };
 addr.mumbai = {
     "evmChainId": 80001,
@@ -23,7 +24,8 @@ addr.mumbai = {
     "lzEndpoint": "0xf69186dfBa60DdB133E91E9A4B5673624293d8F8",
     "chainId": 10109,
     "bgcolor": "purple",
-    "slug": "mumbai"
+    "slug": "mumbai",
+    "native": "MATIC"
 };
 addr["arbitrum-goerli"] = {
     "evmChainId": 421613,
@@ -34,7 +36,8 @@ addr["arbitrum-goerli"] = {
     "lzEndpoint": "0x6aB5Ae6822647046626e83ee6dB8187151E1d5ab",
     "chainId": 10143,
     "bgcolor": "blue",
-    "slug": "arbitrum-goerli"
+    "slug": "arbitrum-goerli",
+    "native": "ETH"
 };
 addr["moonbeam-alpha"] = {
     "evmChainId": 1287,
@@ -45,7 +48,8 @@ addr["moonbeam-alpha"] = {
     "lzEndpoint": "0xb23b28012ee92E8dE39DEb57Af31722223034747",
     "chainId": 10126,
     "bgcolor": "red",
-    "slug": "moonbase-alpha"
+    "slug": "moonbase-alpha",
+    "native": "DEV"
 };
 
 var rpcURLs = {};
@@ -394,6 +398,7 @@ $( document ).ready(function() {
     $("#birth-chain").change(async function(){
         const newChain = $(this).val();
         $(".birth-chain-name").text(addr[newChain].name);
+        $("#native-token").text(addr[newChain].native);
         updateRemaining(newChain);
         await switchChain(addr[newChain].evmChainId);
     });
