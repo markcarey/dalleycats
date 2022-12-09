@@ -60,6 +60,10 @@ contract CrossChainNFT is Initializable, ONFT721Upgradeable, ERC721URIStorageUpg
         bytes memory payload = abi.encode(abi.encodePacked(_to), _tokenId, this.tokenURI(_tokenId));
         return lzEndpoint.estimateFees(_dstChainId, address(this), payload, false, "");
     }
+    function evmEstimateMintAndSendFee(uint16 _dstChainId, address _to, string memory uri) public view returns (uint nativeFee, uint zroFee) {
+        bytes memory payload = abi.encode(abi.encodePacked(_to), 9999, uri);
+        return lzEndpoint.estimateFees(_dstChainId, address(this), payload, false, "");
+    }
 
     // @dev convenience method
     function evmSend(address payable _from, uint16 _dstChainId, address _to, uint _tokenId) public payable {
