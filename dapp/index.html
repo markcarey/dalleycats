@@ -58,7 +58,7 @@
               <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
               <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
               <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
-              <li class="align-items-center h-auto mt-2 mt-lg-0 ms-lg-2"><a id="connect-button" class="btn btn-primary rounded-pill d-inline-block" data-bs-toggle="offcanvas" href="#offcanvas" role="button" aria-controls="offcanvas"><span class="me-1"><i class="fas fa-wallet"></i></span> Connect</a></li>
+              <li class="align-items-center h-auto mt-2 mt-lg-0 ms-lg-2"><a id="connect-button" class="btn btn-primary rounded-pill d-inline-block" data-bs-toggle="offcanvas" href="#offcanvas" role="button" aria-controls="offcanvas"><span class="me-1"><i class="fas fa-wallet"></i></span> <span class="address">Connect</span></a></li>
               <li class="align-items-center h-auto mt-2 mt-lg-0 ms-lg-3"><a class="btn btn-light rounded-pill d-inline-block" href="https://discord.gg/4Q8UV6rXxz"><span class="me-1"><i class="fab fa-discord"></i></span> Discord</a></li>
             </ul>
           </div>
@@ -417,6 +417,16 @@
                 </div>
               </div>
               <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingFourPlus">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFourPlus" aria-expanded="false" aria-controls="flush-collapseFourPlus">What about background colors?</button>
+                </h2>
+                <div id="flush-collapseFourPlus" class="accordion-collapse collapse" aria-labelledby="flush-headingFourPlus" data-bs-parent="#faqTopics">
+                  <div class="accordion-body">
+                    <p class="mb-0">Cats born on Ethereum Goerli have grey backgrounds. Cats born on Polygon Mumbai have purple backgrounds. Cats born on Moonbase Alpha have red backgrounds. Cats born on Arbitrum Goerli have blue backgrounds. That's just how Dalley Cats roll. Meow.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
                 <h2 class="accordion-header" id="flush-headingFive">
                   <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseFive" aria-expanded="false" aria-controls="flush-collapseFive">What chains are supported?</button>
                 </h2>
@@ -473,7 +483,7 @@
       <!-- Social Icon -->
       <ul class="social-icons social-icons-dark social-icons-lg justify-content-center mb-4">
         <li class="social-icons-discord"><a data-bs-toggle="tooltip" href="https://discord.gg/4Q8UV6rXxz" target="_blank" title="Discord"><i class="fab fa-discord"></i></a></li>
-        <li class="social-icons-twitter"><a data-bs-toggle="tooltip" href="https://twitter.com" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
+        <li class="social-icons-twitter"><a data-bs-toggle="tooltip" href="https://twitter.com/mthacks" target="_blank" title="Twitter"><i class="fab fa-twitter"></i></a></li>
       </ul>
     </div>
   </footer>
@@ -497,7 +507,7 @@
 <script src="js/theme.js"></script>
 <script src="https://cdn.ethers.io/lib/ethers-5.1.umd.min.js" type="text/javascript"></script>  
 <script src="https://cdn.jsdelivr.net/npm/@alch/alchemy-web3@latest/dist/alchemyWeb3.min.js"></script>
-<script src="/js/abis.js?v=1"></script>
-<script src="/js/dapp.js?v=1"></script>
+<script src="/js/abis.js?v=2"></script>
+<script src="/js/dapp.js?v=2"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 const zeroAddress = "0x0000000000000000000000000000000000000000";
-const nftAddress = "0xeCd4113f4Bf51FcfC309750355B507b4ca798867"; // all chains
+const nftAddress = "0xFeDD8DEAC4Fb5E72E92d1Cef93e9C6986ad9B541"; // all chains
 
 var addr = {};
 
@@ -162,6 +162,13 @@ chains["1287"] = {
     "blockExplorerUrls": ["https://moonbase.moonscan.io/"],
 }
 
+function abbrAddress(address){
+    if (!address) {
+        address = accounts[0];
+    }
+    return address.slice(0,4) + "..." + address.slice(address.length - 4);
+}
+
 async function connect(){
     if (window.ethereum) {
         //console.log("window.ethereum true");
@@ -176,6 +183,7 @@ async function connect(){
                 params: [{ chainId: web3.utils.toHex(addr[chain].evmChainId) }],
             });
         }
+        $(".address").text(abbrAddress());
         $("#offcanvas").find("button").click();
     } else {
         // The user doesn't have Metamask installed.
@@ -204,15 +212,16 @@ async function mint(mintChain, color, wearing, deliveryChain) {
     //var result = await res.json();
     var result ={
         "result": "ok",
-        "image": "bafybeibecrfyszdg6mi4fjehtqhncodppjn5upnw3as632sknh3gtiwr4e",
-        "meta": "bafkreibzsfck7kkrxcocxx2tqlwkk3g4fw3lwcaejiznhn4uvp5wklnowq"
+        "image": "bafybeiaomrguepg4jmcpujyr5sklyhrqhvw6bo6redy4uvbubd7n2m2p4i",
+        "meta": "bafkreibfqhevkqjufmugut5qo445icms6o2juc6x2a2vlnag4vdiu4bu2q"
         };
     const ipfsMeta = "ipfs://" + result.meta;
     const imageURL = ipfsToHttp(result.image);
+    preload(imageURL);
     var tx;
     if (mintChain != deliveryChain) {
         jumping = true;
-        const fee = await dalley.connect(ethersSigner).evmEstimateSendFee(addr[deliveryChain].chainId, accounts[0], 0);
+        const fee = await dalley.connect(ethersSigner).evmEstimateMintAndSendFee(addr[deliveryChain].chainId, accounts[0], ipfsMeta);
         console.log("estFee", fee[0]);
         tx = await dalley.connect(ethersSigner).mintAndSend(ipfsMeta, addr[deliveryChain].chainId, {"value": ''+fee[0]});
     } else {
@@ -234,7 +243,16 @@ async function mint(mintChain, color, wearing, deliveryChain) {
         await sleep(2000);
         if (jumping) {
             $("#mint-button").text("Jumping...");
-            // TODO: filter for arrival on destination chain
+            let arrivalFilter = addr[deliveryChain].dalley.filters.Transfer(zeroAddress, accounts[0]);
+            addr[deliveryChain].dalley.once(arrivalFilter, async (from, to, id, event) => { 
+                tokenId = id;
+                $("#mint-title").text("");
+                $("#mint-title-label").text("Jump Completed!");
+                $("#jump-button").text("Jump Completed.");
+                await sleep(2000);
+                $("#jump-button").hide();
+                $("#mint-button").show().attr("href", getMarketplaceURL(deliveryChain, tokenId)).text("View on Opensea");
+            });
         } else {
             $("#mint-button").attr("href", getMarketplaceURL(mintChain, tokenId)).text("View on Opensea");
             $("#jump-button").show();
@@ -254,7 +272,7 @@ async function jump(tokenId, deliveryChain) {
         tokenId = id;
         $("#jump-button").text("Jump Started...");
     });
-    let arrivalFilter = addr[deliveryChain].dalley.filters.Transfer(nftAddress, accounts[0]);
+    let arrivalFilter = addr[deliveryChain].dalley.filters.Transfer(zeroAddress, accounts[0]);
     addr[deliveryChain].dalley.once(arrivalFilter, async (from, to, id, event) => { 
         tokenId = id;
         $("#mint-title").text("");
@@ -330,6 +348,11 @@ function getMarketplaceURL(currentChain, tokenId) {
     var slug = addr[currentChain].slug;
     var url = `https://testnets.opensea.io/assets/${slug}/${nftAddress}/${tokenId}`;
     return url;
+}
+
+function preload(url) {
+    var image = new Image();
+	image.src = url;
 }
 
 $( document ).ready(function() {

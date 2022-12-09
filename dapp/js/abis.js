@@ -515,6 +515,40 @@ const onftABI = [
         "type": "address"
       },
       {
+        "internalType": "string",
+        "name": "uri",
+        "type": "string"
+      }
+    ],
+    "name": "evmEstimateMintAndSendFee",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "nativeFee",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "zroFee",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint16",
+        "name": "_dstChainId",
+        "type": "uint16"
+      },
+      {
+        "internalType": "address",
+        "name": "_to",
+        "type": "address"
+      },
+      {
         "internalType": "uint256",
         "name": "_tokenId",
         "type": "uint256"
