@@ -246,11 +246,11 @@
           
           <!-- Item Details -->
           <div class="col-lg-6 text-center text-lg-start">
-            <h1 class="text-light text-5 mb-4">Dalley Cat #?</h1>
-            <h2 class="text-10 text-white fw-600 mb-4">Public Mint is <span class="bg-success rounded-4 px-3">Live</span></h2>
+            <h1 class="text-light text-5 mb-4">Dalley Cat #<span id="tokenid">?</span></h1>
+            <h2 class="text-10 text-white fw-600 mb-4"><span id="mint-title">Public Mint is </span><span id="mint-title-label" class="bg-success rounded-4 px-3">Live</span></h2>
             
             <!-- Birth Chain -->
-            <div class="row g-2 align-items-center justify-content-center justify-content-lg-start mb-4">
+            <div class="mint-field row g-2 align-items-center justify-content-center justify-content-lg-start mb-4">
               <div class="col-12 col-sm-auto text-light"> Mint on: </div>
               <div class="col-auto col-sm-4">
                 <div class="input-group form-dark">
@@ -265,7 +265,7 @@
             </div>
 
             <!-- Color -->
-            <div class="row g-2 align-items-center justify-content-center justify-content-lg-start mb-4">
+            <div class="mint-field row g-2 align-items-center justify-content-center justify-content-lg-start mb-4">
               <div class="col-12 col-sm-auto text-light"> Color: </div>
               <div class="col-auto col-sm-4">
                 <div class="input-group form-dark">
@@ -292,7 +292,7 @@
             </div>
 
             <!-- Wearing -->
-            <div class="row g-2 align-items-center justify-content-center justify-content-lg-start mb-4">
+            <div class="mint-field row g-2 align-items-center justify-content-center justify-content-lg-start mb-4">
               <div class="col-12 col-sm-auto text-light"> Wearing: </div>
               <div class="col-auto col-sm-4">
                 <div class="input-group form-dark">
@@ -319,7 +319,7 @@
             </div>
 
             <!-- Delivery Chain -->
-            <div class="row g-2 align-items-center justify-content-center justify-content-lg-start mb-4">
+            <div class="mint-field row g-2 align-items-center justify-content-center justify-content-lg-start mb-4">
               <div class="col-12 col-sm-auto text-light"> Deliver to: </div>
               <div class="col-auto col-sm-4">
                 <div class="input-group form-dark">
@@ -346,7 +346,11 @@
             </div>
             
             <!-- Button -->
-            <div class="d-grid"> <a class="btn btn-primary btn-lg rounded-pill" id="mint-button" href="#">Mint Now</a> </div>
+            <div class="d-grid">
+                <a class="btn btn-primary btn-lg rounded-pill" id="mint-button" href="#">Mint Now</a>
+                <a class="btn btn-primary btn-lg rounded-pill" style="margin-top: 10px; display: none;" id="jump-button" href="#">Jump</a>
+            </div>
+
           </div>
         </div>
       </div>
