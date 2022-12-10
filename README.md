@@ -27,9 +27,9 @@ Dalley Cats made some adjustments and additions:
 ![Minted!](https://dalleycats.club/images/minted-3.png)
 Dalley Cats is currently deployed to four testnets. You can mint on any chain and _jump_ your Cat to another, if desired:
 
-- [Ethereum Goerli](https://goerli.etherscan.io/address/0xfedd8deac4fb5e72e92d1cef93e9c6986ad9b541) (minting #1-1000)
-- [Polygon Mumbai](https://mumbai.polygonscan.com/address/0xFeDD8DEAC4Fb5E72E92d1Cef93e9C6986ad9B541) (minting #1001-2000)
-- [Arbitrum Goerli](https://goerli.arbiscan.io/address/0xFeDD8DEAC4Fb5E72E92d1Cef93e9C6986ad9B541) (minting #2001-3000)
+- [Ethereum Goerli](https://goerli.etherscan.io/address/0xfedd8deac4fb5e72e92d1cef93e9c6986ad9b541) (minting #1-1000) [OpenSea](https://testnets.opensea.io/collection/dalley-cats-6k8qza3m7q)
+- [Polygon Mumbai](https://mumbai.polygonscan.com/address/0xFeDD8DEAC4Fb5E72E92d1Cef93e9C6986ad9B541) (minting #1001-2000) [OpenSea](https://testnets.opensea.io/collection/dalley-cats-orkqdf41bn)
+- [Arbitrum Goerli](https://goerli.arbiscan.io/address/0xFeDD8DEAC4Fb5E72E92d1Cef93e9C6986ad9B541) (minting #2001-3000) [OpenSea](https://testnets.opensea.io/collection/dalley-cats-58wwzruowu)
 - [Moonbase Alpha](https://moonbase.moonscan.io/address/0xfedd8deac4fb5e72e92d1cef93e9c6986ad9b541) (minting #3001-4000)
 
 The contract is deployed to the same address on each of the above chains: `0xFeDD8DEAC4Fb5E72E92d1Cef93e9C6986ad9B541`.
@@ -43,3 +43,6 @@ The dapp can be found at https://dalleycats.club or ipfs://Qma7H8Fw8RvRhkzu7EfYj
 - pricing of mainnet mint?
 - choose ~10 chains for mainnet launch
 - deploy to mainnets
+
+# Fun Fact
+This is my _second_ project using LayerZero. In April 2022, I created OmniGov, an omnichain governance tool that enables you to vote on one chain, and execute successful proposals on other chains. More at https://github.com/markcarey/omnigov
