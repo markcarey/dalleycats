@@ -42,7 +42,7 @@ addr["arbitrum-goerli"] = {
 addr["moonbeam-alpha"] = {
     "evmChainId": 1287,
     "name": "Moonbase Alpha",
-    "rpc": "moonbase-alpha.public.blastapi.io",
+    "rpc": "moonbeam-alpha.api.onfinality.io/rpc?apikey=63f987d5-9673-4446-a49a-0c72b9dc4899",
     "start": 3001,
     "end": 4000,
     "lzEndpoint": "0xb23b28012ee92E8dE39DEb57Af31722223034747",
@@ -51,11 +51,6 @@ addr["moonbeam-alpha"] = {
     "slug": "moonbase-alpha",
     "native": "DEV"
 };
-
-var rpcURLs = {};
-rpcURLs.goerli = "eth-goerli.alchemyapi.io/v2/n_mDCfTpJ8I959arPP7PwiOptjubLm57";
-rpcURLs.mumbai = "polygon-mumbai.g.alchemy.com/v2/Ptsa6JdQQUtTbRGM1Elvw_ed3cTszLoj";
-rpcURLs.optigoerli = "opt-goerli.g.alchemy.com/v2/jb4AhFhyR0X_ChVX5J1f0oWQ6GvJqLK0";
 
 const sidedoorAPI = "https://api.sidedoor.tools";
 
