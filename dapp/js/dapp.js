@@ -255,10 +255,14 @@ async function mint(mintChain, color, wearing, deliveryChain) {
                 await sleep(2000);
                 $("#jump-button").hide();
                 $("#mint-button").show().attr("href", getMarketplaceURL(deliveryChain, tokenId)).text("View on Opensea");
+                await sleep(2000);
+                $("#reset-button").show();
             });
         } else {
             $("#mint-button").attr("href", getMarketplaceURL(mintChain, tokenId)).text("View on Opensea");
             $("#jump-button").show();
+            await sleep(2000);
+            $("#reset-button").show();
         }
         updateRemaining(chain);
     });
@@ -284,6 +288,8 @@ async function jump(tokenId, deliveryChain) {
         await sleep(2000);
         $("#jump-button").hide();
         $("#mint-button").show().attr("href", getMarketplaceURL(deliveryChain, tokenId)).text("View on Opensea");
+        await sleep(2000);
+        $("#reset-button").show();
     });
     tx.wait();
     // TODO: filter for arrival on destination chain
@@ -338,6 +344,17 @@ async function updateRemaining(targetChain) {
     $("#remaining").text(remaining);
 }
 
+function reset() {
+    $("#mint-image").attr("src", "https://dalleycats.club/images/mint.png");
+    $("#tokenid").text("?");
+    $("#mint-title").text("Public Mint is ");
+    $("#mint-title-label").text("Live");
+    $("#birth-chain, #color, #wearing, #delivery-chain").parents(".mint-field").show();
+    $("#jump-button").hide().text("Jump");
+    $("#mint-button").attr("href", "#").show().text("Mint Now");
+    tokenId = null;
+}
+
 function ipfsToHttp(ipfs) {
     var http = "";
     var cid = ipfs.replace("ipfs://", "");
@@ -386,6 +403,12 @@ $( document ).ready(function() {
         $(this).text("Jumping...");
         const deliveryChain = $("#delivery-chain").val();
         jump(tokenId, deliveryChain);
+        return false;
+    });
+
+    $("#reset-button").click(function(){
+        reset();
+        $(this).hide();
         return false;
     });
 
