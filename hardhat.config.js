@@ -7,6 +7,21 @@ require("@nomiclabs/hardhat-etherscan");
 require("@nomiclabs/hardhat-web3");
 require("@nomiclabs/hardhat-waffle");
 const { API_URL_MUMBAI, API_URL_POLYGON, API_URL_GOERLI, API_URL_OPTIGOERLI, API_URL_ARBIGOERLI, API_URL_MOONBEAMALPHA, PRIVATE_KEY, ETHERSCAN_API_KEY, POLYSCAN_API_KEY, OPTISCAN_API_KEY, ARBISCAN_API_KEY, MOONBEAM_API_KEY } = process.env;
+
+task("flat", "Flattens and prints contracts and their dependencies (Resolves licenses)")
+  .addOptionalVariadicPositionalParam("files", "The files to flatten", undefined, types.inputFile)
+  .setAction(async ({ files }, hre) => {
+    let flattened = await hre.run("flatten:get-flattened-sources", { files });
+    
+    // Remove every line started with "// SPDX-License-Identifier:"
+    flattened = flattened.replace(/SPDX-License-Identifier:/gm, "License-Identifier:");
+    flattened = `// SPDX-License-Identifier: MIXED\n\n${flattened}`;
+
+    // Remove every line started with "pragma experimental ABIEncoderV2;" except the first one
+    flattened = flattened.replace(/pragma experimental ABIEncoderV2;\n/gm, ((i) => (m) => (!i++ ? m : ""))(0));
+    console.log(flattened);
+  });
+
 module.exports = {
   solidity: {
     compilers: [
