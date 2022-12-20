@@ -125,7 +125,7 @@ module.exports = {
         network: "arbitrum-goerli",
         chainId: 421613,
         urls: {
-          apiURL: "https://api-goerli.arbiscan.io/",
+          apiURL: "https://api-goerli.arbiscan.io/api",
           browserURL: "https://goerli.arbiscan.io/"
         }
       },
@@ -133,7 +133,7 @@ module.exports = {
         network: "moonbeam-alpha",
         chainId: 1287,
         urls: {
-          apiURL: "https://api-moonbase.moonscan.io/",
+          apiURL: "https://api-moonbase.moonscan.io/api",
           browserURL: "https://moonbase.moonscan.io/"
         }
       }
